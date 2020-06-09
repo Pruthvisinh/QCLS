@@ -1,0 +1,83 @@
+=  f.hidden_field(:role, value: f.object.role)
+
+- unless @user.individual?
+  .form-group.row
+    .col-lg-6
+      = f.text_field :individual_id, class: 'form-control', required: true
+      = f.label :individual_id, 'Id', class: 'form-control-placeholder'
+
+.form-group.row
+  .col-lg-6
+    = f.text_field :first_name,class: 'form-control', required: true
+    = f.label :first_name,  class: 'form-control-placeholder'
+  .col-lg-6
+    = f.text_field :last_name,class: 'form-control', required: true
+    = f.label :last_name,  class: 'form-control-placeholder'
+
+.form-group.row
+  .col-lg-6
+    = f.email_field :email,class: 'form-control', required: true
+    = f.label :email,'Email Address',  class: 'form-control-placeholder'
+
+  .col-lg-6
+    label.radio-inline
+      = f.radio_button :gender, 'male', checked: @user.gender == 'male' || @user.gender.nil?
+      |  Male 
+    label.radio-inline
+      = f.radio_button :gender, 'female'
+      |  Female 
+
+.form-group.row
+  .col-lg-6
+    = f.text_field :telephone,class: 'form-control',required: true
+    = f.label :telephone, 'Telephone', class: 'form-control-placeholder'
+  .col-lg-6
+    = f.text_field :phone,class: 'form-control', required: true
+    = f.label :phone,'Cell Phone',  class: 'form-control-placeholder'
+
+- if @user.individual?
+  .form-group.row
+    .col-lg-6
+      = f.text_field :medicare_number,class: 'form-control', required: true
+      = f.label :medicare_number,  class: 'form-control-placeholder'
+
+    .col-lg-6
+      = f.text_field :medicaid_number,class: 'form-control', required: true
+      = f.label :medicaid_number,  class: 'form-control-placeholder'
+
+.form-group.row
+  .col-lg-6
+    = f.text_field :tabs_id,class: 'form-control', required: true
+    = f.label :tabs_id,'TABS ID',  class: 'form-control-placeholder'
+
+  - if @user.staff?
+    .col-lg-6
+      = f.label :service_type_ids, "Service Types", class: 'form-control-placeholder'
+      = f.select(:service_type_ids, options_from_collection_for_select(ServiceType.all, :id, :name, f.object.service_type_ids), {}, { :class => 'form-control chosen-select', multiple: true })
+
+.form-group.row
+  .col-lg-6
+    = f.text_field :address_1,class: 'form-control', required: true
+    = f.label :address_1,  class: 'form-control-placeholder'
+  
+  .col-lg-6
+    = f.text_field :address_2,class: 'form-control', required: true
+    = f.label :address_2,  class: 'form-control-placeholder'
+
+.form-group.row
+  .col-lg-6
+    = f.label :state, "State", style: 'opacity: .5;',  class: 'form-control-placeholder'
+    = f.select(:state, CS.states('us').map {|item| [item.last, item.first]}, {}, { :class => 'form-control chosen-select', required: true})
+  
+  .col-lg-6
+    = f.text_field :zip,class: 'form-control', required: true
+    = f.label :zip,  class: 'form-control-placeholder'
+
+.form-group.row
+  .col-lg-6
+    label.radio-inline.no-padding
+      = f.check_box :active
+      = f.label :active
+
+.form-group.savebut
+  button.btn.btn-default[type="submit"] Save

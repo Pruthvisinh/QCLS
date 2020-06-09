@@ -1,0 +1,74 @@
+#page-wrapper
+  .panel.panel-default
+    .panel-heading  
+      .clearfix
+        h1.pull-left
+          = @user.full_name
+          = " (#{@user.active? ? 'Active' : ''})"
+
+        .pull-right
+          = link_to users_path(@user.role) do
+            h1.fa.fa-mail-reply.fa-2x
+
+    .panel-body
+      .details
+        - unless @user.individual?
+          .form-group.row
+            label.col-lg-2 ID:
+            .col-lg-3= @user.individual_id
+
+        .form-group.row
+          label.col-lg-2 First name:
+          .col-lg-3= @user.first_name
+
+          label.col-lg-2 Last name:
+          .col-lg-3= @user.last_name
+
+
+        .form-group.row
+          label.col-lg-2 Email:
+          .col-lg-3= @user.email
+
+          label.col-lg-2 Gender:
+          .col-lg-3= @user.gender.try(:capitalize)
+
+        .form-group.row
+          label.col-lg-2 Telephone:
+          .col-lg-3= @user.telephone
+
+          label.col-lg-2 Cell Phone:
+          .col-lg-3= @user.phone
+
+        - if @user.individual?
+          .form-group.row
+            label.col-lg-2 Medicare Number:
+            .col-lg-3= @user.medicare_number
+
+            label.col-lg-2 Medicaid number:
+            .col-lg-3= @user.medicaid_number
+
+      
+        .form-group.row
+          label.col-lg-2 TABS ID:
+          .col-lg-3= @user.tabs_id
+
+          - if @user.staff?
+            label.col-lg-2 Service Types:
+            .col-lg-3= @user.service_types.map(&:name).join(', ')
+
+        .form-group.row
+          label.col-lg-2 Address 1:
+          .col-lg-3= @user.address_1
+
+          label.col-lg-2 Address 2:
+          .col-lg-3= @user.address_2
+
+
+        .form-group.row
+          label.col-lg-2 State::
+          .col-lg-3= CS.states('us')[@user.state.to_sym] rescue nil
+
+          label.col-lg-2 Zip:
+          .col-lg-3= @user.zip
+
+     

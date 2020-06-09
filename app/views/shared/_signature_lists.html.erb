@@ -1,0 +1,26 @@
+<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+  <div class="form-group">
+    <% unless sl.object.new_record? %>
+        <img src="<%= sl.object.signature %>", width="200", height="200" />
+    <% end %>
+    <%= sl.text_field :signature, class: 'form-control signature', readonly: true%>
+    <%= sl.label :signature, class: 'form-control-placeholder' %>
+  </div>
+</div>
+
+<div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+  <div class="form-group">
+    <%unless sl.object.new_record? %>
+        <div style="height: 200px"></div>
+    <% end %>
+    <%= sl.text_field :initials, class: 'form-control' %>
+    <%= sl.label :initials, class: 'form-control-placeholder' %>
+  </div>
+</div>
+
+<% unless sl.object.new_record? %>
+    <div class="col-sm-2">
+      <%= sl.check_box :_destroy %>
+      <%= sl.label :_destroy, 'Delete' %>
+    </div>
+<% end %>

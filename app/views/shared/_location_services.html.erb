@@ -1,0 +1,23 @@
+
+  <div class="col-md-4 col-sm-4 col-lg-4">
+    <div class="form-group">
+      <%= ls.text_field :location, class: "form-control" %>
+      <%= ls.label :location, nil ,class: 'form-control-placeholder' %>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-2 col-lg-2">
+    <div class="form-group">
+      <%= ls.text_field :initials, class: "form-control" %>
+      <%= ls.label :initials, nil ,class: 'form-control-placeholder' %>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-lg-4">
+    <div class="form-group">
+      <%= ls.text_field :date, class: "form-control datepicker" %>
+      <%= ls.label :date, nil ,class: 'form-control-placeholder' %>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <%= ls.check_box :_destroy %>
+    <%= ls.label :delete%>
+  </div>

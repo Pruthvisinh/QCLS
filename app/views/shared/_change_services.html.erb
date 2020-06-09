@@ -1,0 +1,22 @@
+  <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+    <div class="form-group">
+      <%= cs.text_field :description, class: "form-control" %>
+      <%= cs.label :description, nil ,class: 'form-control-placeholder' %>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-6 col-lg-4 col-xs-12">
+    <div class="form-group">
+      <%= cs.text_field :date, class: "form-control datepicker" %>
+      <%= cs.label :date, nil ,class: 'form-control-placeholder' %>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <%= cs.check_box :_destroy %>
+    <%= cs.label :delete%>
+  </div>
+
+  <script type="text/javascript">
+    $('.datepicker').datepicker({format: 'yyyy/mm/dd'});
+  </script>

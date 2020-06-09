@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edocuments</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style type="text/css">
+    .main-wrap {
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .medication-count-table {
+      width: 100%;
+      border: 2px solid #333;
+      border-collapse: collapse;
+    }
+
+    .medication-count-table th,
+    .medication-count-table td {
+      border: 2px solid #333;
+      padding: 0.5rem 2rem;
+    }
+
+    .medication-count-table td {
+      /*white-space: nowrap;*/
+    }
+
+    .medication-count-table th {
+      font-weight: normal;
+    }
+
+    .medication-count-table td {
+      border-style: none solid;
+      vertical-align: top;
+    }
+
+    .medication-count-table th {
+      padding: 0.2em;
+      vertical-align: middle;
+      /*text-align: center;*/
+    }
+
+    .medication-count-table thead tr.title-list > th {
+      text-align: center;
+    }
+
+    /* Mar table */
+    table.mar-table tbody{
+      font-size: 10px;
+      font-weight: bold;
+    }
+    /* Mar table */
+
+    .headline {
+      border: 4px double #333;
+    }
+    .doc-info li span {
+      text-align: right;
+      border-bottom: 2px solid #333;
+      margin-left: 15px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .hints div, .service-key i {
+      font-weight: normal;
+      font-size: 10px;
+    }
+
+    .info-wrap {
+      border: 1px solid #333;
+      padding: 15px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .span-underline {
+      position: relative;
+    }
+    .span-underline::before {
+      position: absolute;
+      content: '';
+      height: 1px;
+      bottom: 0;
+      left: 0px;
+      right: 0px;
+      min-width: 100%;
+      border-bottom: 1px dashed #333;
+    }
+
+    .route-list li {
+      margin-right: 15px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .route-list li span.check-mark {
+      padding-left: 20px;
+      position: relative;
+      vertical-align: top;
+    }
+
+    .route-list li span.check-mark::before {
+      position: absolute;
+      content: '';
+      width: 15px;
+      height: 15px;
+      border: 1px solid #333;
+      vertical-align: middle;
+      left: 0;
+      bottom: 2px;
+    }
+
+    .checkmark{
+      display:inline-block;
+    }
+
+    .checkmark::after{
+      content: '';
+      display: block;
+      width: 6px;
+      height: 12px;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      position: absolute;
+      top: 0px;
+      left: 5px;
+    }
+
+    /* Some extra css for tally table */
+    /* borderless table */
+    .table.table-borderless td, .table.table-borderless th {
+      border: 0 !important;
+    }
+
+    .table.table-borderless {
+      margin-bottom: 0px;
+    }
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+    .common-ul-style {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+    }
+    .para-hr {
+      border-bottom: 2px solid #333;
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+    .left-sm-text {
+      text-align: left;
+      font-size: 8px;
+      vertical-align: top;
+    }
+    .right-sm-text {
+      text-align: right;
+      font-size: 8px;
+      vertical-align: bottom;
+    }
+    .flexible-td {
+      word-wrap: break-word;
+      white-space: inherit;
+    }
+    .l-border-transparent {
+      border-left: transparent !important;
+    }
+    .r-border-transparent {
+      border-right: transparent !important;
+    }
+    .space {
+      height: 50px;
+    }
+    .width-55 {
+      width: 55px;
+    }
+    .min-width-60 {
+      min-width: 60px;
+    }
+    .min-width-250 {
+      min-width: 250px;
+    }
+    .table-area-field100 {
+      height: 100px;
+    }
+    .table-area-field100 > th {
+      vertical-align: top !important;
+    }
+
+    /* Bootstrap customization for tally table design */
+    .table {
+      font-size: 16px;
+    }
+
+    .table > thead > tr > th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #333;
+    }
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+      border-top: 2px solid #333;
+    }
+
+    .mar-table > thead > tr > th {
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .mar-table > tbody > tr > td {
+      font-size: 11px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class='container'>
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+#filter.row
+  .col-lg-8
+    span Filter
+
+    form.auto-submit
+      = hidden_field_tag :type, params[:type]
+      ul.list_select
+        li
+          = select_tag :active, options_for_select([['Active', true], ['Inactive', false]], params[:active]), include_blank: '-- Status -- ', class: 'form-control'
+
+        li
+          = select_tag :gender, options_for_select([['Male', 'male'], ['Female', 'female']], params[:gender]), include_blank: '-- Gender -- ', class: 'form-control'
+            
+  .searchbox.col-lg-4
+    .form-group
+      .fa.fa-search
+      = form_tag(users_path, method: :get)  do
+        = text_field_tag(:search, params[:search], class: 'form-control' )
+        = hidden_field_tag :type, params[:type]
+        

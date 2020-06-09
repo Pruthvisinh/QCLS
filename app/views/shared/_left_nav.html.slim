@@ -1,0 +1,91 @@
+nav.navbar.navbar-default.navbar-static-top[role="navigation" style="margin-bottom: 0"]
+  .navbar-header.col-md-6
+    button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
+      span.sr-only
+        | Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    a.navbar-brand[href=root_path]
+      = image_tag 'logo.png', alt: ''
+    span
+      | Quality Comfort Living Services LLC
+  ul.nav.navbar-top-links.navbar-right
+    li.dropdown
+      a.dropdown-toggle[href="#"]
+        .fa.fa-check-circle-o
+        |  Save 
+    li.dropdown
+      a.dropdown-toggle[href="#"]
+        .fa.fa-print
+        | Print 
+    li.dropdown
+      a.dropdown-toggle.save-as-pdf[data-toggle="dropdown" href="javascript:void(0)"]
+        .fa.fa-file-text-o
+        | Save As PDF 
+
+  .navbar-default.sidebar[role="navigation"]
+    .sidebar-nav.navbar-collapse
+      ul#side-menu.nav
+        li
+          = link_to settings_users_path do
+            .fa.fa-cog
+            |  Settings
+
+        - if can? :read, :individual
+          li
+            a[href="javascript:;"]
+              .fa.fa-users
+              |  Users
+            ul.nav.nav-second-level.collapse class=(controller_name == 'users' && action_name != 'settings' ? 'in' : '')
+              - if can? :read, :admin
+                li
+                  = link_to 'Admin', users_path(type: 'admin')
+              - if can? :read, :staff
+                li
+                  = link_to 'Staff', users_path(type: 'staff')
+              - if can? :read, :individual
+                li
+                  = link_to 'Individuals', users_path(type: 'individual')
+      
+        li
+          a[href="javascript:;"]
+            .fa.fa-life-bouy
+            |  eDoc Suite
+          ul.nav.nav-second-level.collapse class=(['bsp_trainings', 'llc_services', 'behaviors', 'medications', 'medication_counts', 'mars', 'docs'].include?(controller_name) ? 'in' : '')
+            li
+              a[href="javascript:;"]
+                | ISP/BSP
+              ul.nav.nav-second-level.collapse.sub-menu class=(active_class('docs'))
+                li
+                  = link_to 'ISP', docs_path(type: :isp)
+                li
+                  = link_to 'BSP', docs_path(type: :bsp)
+                li
+                  = link_to 'ISP/BSP Training', bsp_trainings_path
+            li
+              = link_to 'Services LLC', llc_services_path
+            li
+              = link_to 'Monthly Behavior Support Data', behaviors_path
+            li
+              = link_to 'Medications', medications_path
+            li
+              = link_to 'Medication Counts', medication_counts_path
+            li
+              = link_to 'Medication Adminstration Records', mars_path
+        li
+          a[href="javascript:;"]
+            .fa.fa-cube
+            |  Folders
+        li
+          a[href="javascript:;"]
+            .fa.fa-calendar
+            |  Calendars
+        li
+          a[href="javascript:;"]
+            .fa.fa-headphones
+            |  Help and Support
+        li
+          = link_to destroy_user_session_path(:authenticity_token => form_authenticity_token()), method: 'delete' do
+            .fa.fa-power-off
+            |  Logout 

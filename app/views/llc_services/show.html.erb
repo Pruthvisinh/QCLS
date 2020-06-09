@@ -1,0 +1,246 @@
+<div id="page-wrapper">
+<div class="row">
+<div class="headline text-center">
+  <h4>Quality Comfort Living & Services LLC</h4>
+</div>
+<div class="space"></div>
+<table class="table medication-count-table mar-table">
+  <!--<caption class="text-center lead">Medication Administration Record (MAR)</caption>-->
+  <thead>
+  <tr>
+    <th class="r-border-transparent" rowspan="1" colspan="20">
+      Monthly Service Documentation
+    </th>
+    <th class="l-border-transparent" rowspan="1" colspan="14">
+      Service Documentation Key:
+    </th>
+  </tr>
+  <tr>
+    <th class="vertical-align-top" colspan="6" style="border-right: none">
+      <div class="monthly-service">
+        <div class=" mb-20">
+          <ul class="common-ul-style doc-info">
+            <li>
+              Individual's Name:
+              <span><%= @llc_service.user.full_name  if @llc_service.user.present? %></span>
+            </li>
+            <li>
+              Medicaid #
+              <span><%= @llc_service.medicaid_number %></span>
+            </li>
+            <li>
+              Location of Service:
+              <span><%= @llc_service.location_of_services %></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="hints clearfix">
+        <div class="pull-left">Group Size 1</div>
+        <div class="pull-right">
+          <span>Times of HPC Services: M-F 2:30p-8:30a; </span>
+          <span>24hrs per day Sat, </span>
+          <span>Sun (All other times and days are as needed.) </span>
+        </div>
+      </div>
+    </th>
+
+    <th class="vertical-align-top" colspan="14" style="border-left: none">
+      <div class="monthly-service">
+        <div class="row mb-20">
+            <ul class="common-ul-style doc-info">
+              <li>
+                Type of Services:
+                <span><%= @llc_service.service_type %></span>
+              </li>
+              <li>
+                Provider Contract:
+                <span><%= @llc_service.provider_contract %></span>
+              </li>
+              <li>
+                 Date:
+                <span><%= @llc_service.date %></span>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </th>
+    <th colspan="14">
+      <table class="table table-borderless">
+        <tbody>
+        <tr>
+          <td colspan="3">Staff Initials = Service Delivered</td>
+        </tr>
+        <tr>
+          <td>F = With Family </td>
+          <td>O = Other (Document reason in notes)</td>
+          <td>S = Sick </td>
+        </tr>
+        <tr>
+          <td>H = Hospitalization</td>
+          <td>R = Refusal of services </td>
+          <td>NA = Not applicable</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="service-key">
+        <i>Staff please document why services were not provided in notes and document the reason code above.</i>
+      </div>
+    </th>
+  </tr>
+  <tr>
+    <th class="min-width-250"><strong>HPC Services Provided</strong></th>
+    <th>Frequency</th>
+    <th>Duration</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    <th>10</th>
+    <th>11</th>
+    <th>12</th>
+    <th>13</th>
+    <th>14</th>
+    <th>15</th>
+    <th>16</th>
+    <th>17</th>
+    <th>18</th>
+    <th>19</th>
+    <th>20</th>
+    <th>21</th>
+    <th>22</th>
+    <th>23</th>
+    <th>24</th>
+    <th>25</th>
+    <th>26</th>
+    <th>27</th>
+    <th>28</th>
+    <th>29</th>
+    <th>30</th>
+    <th>31</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @llc_service.hpc_service.attributes.except("id","hpc_serviceable_id", "hpc_serviceable_type", "created_at", "updated_at").each do |key, value| %>
+      <tr>
+        <td class="flexible-td"><%= value %></td>
+        <td>Up to Daily</td>
+        <td>Span</td>
+        <td>KD</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<!-- Quality Comfort Living & Services LLC -->
+
+<div class="space"></div>
+<!-- Locations where other services were provided -->
+<h4 class="text-center">Locations where other services were provided</h4>
+<table class="table medication-count-table">
+  <thead>
+  <tr>
+    <th>Location</th>
+    <th>Initials</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @llc_service.location_services.each do |ls| %>
+  <tr>
+    <td>
+      <%= ls.location %>
+    </td>
+    <td>
+      <%= ls.initials %>
+    </td>
+    <td>
+      <%= ls.date %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+<!-- Locations where other services were provided -->
+
+<div class="space"></div>
+<!-- Notes: Please note: -->
+<h4 class="text-center">Notes: Please note: (any changes in services or service delivery, new behavior/medical issues or any new discoveries, and reason codes.</h4>
+<table class="table medication-count-table">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @llc_service.change_services.each do |cs| %>
+  <tr>
+    <td><%= cs.date %></td>
+    <td><%= cs.description %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+<!-- Notes: Please note: -->
+
+<div class="space"></div>
+<!-- Signature -->
+<h4 class="text-center">Notes: Please note: (any changes in services or service delivery, new behavior/medical issues or any new discoveries, and reason codes.</h4>
+<table class="table medication-count-table">
+  <thead>
+  <tr>
+    <th>Signature</th>
+    <th>Initials</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @llc_service.signature_lists.each do |sl| %>
+  <tr>
+    <td><%= image_tag sl.signature, size: 125 %></td>
+    <td><%= sl.initials %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+  $(".save-as-pdf" ).click(function() {
+    window.location.replace("<%= llc_service_path(@llc_service, format: :pdf) %>")
+  });
+</script>

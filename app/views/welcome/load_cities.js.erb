@@ -1,0 +1,8 @@
+<% if @cities.present? %>
+$('#user_company_city').empty();
+$("#user_company_city").append("<option value='Select City'>Select City</option>");
+<% @cities.each do |city| %>
+$("#user_company_city").append("<option value=<%= city %>> <%= city %></option>");
+<% end %>
+$('#user_company_city').trigger("chosen:updated");
+<% end %>

@@ -1,0 +1,59 @@
+<div id="page-wrapper">
+  <div class="row">
+    <p>&nbsp;</p>
+    <div class="panel panel-default">
+      <div class="panel-heading indiviuals_list">
+        Services LLC
+
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Individual Name</th>
+              <th>Date of Training</th>
+              <th>Last Edited</th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+              <% @llc_services.each_with_index  do |llc_service, i| %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><%= llc_service.user.full_name if llc_service.user.present? %></td>
+                <td><%= llc_service.date %></td>
+                <td><%= llc_service.user_id %></td>
+                <td><%= link_to edit_llc_service_path(llc_service) do %>
+                      <%= image_tag 'setting.png' %> Edit
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to llc_service_path(llc_service) do %>
+                      <i class="fa fa-eye"></i> View
+                  <% end %>
+                </td>
+                <td>
+                  <% if current_user.admin? %>
+                  <%= link_to  llc_service_path(llc_service,authenticity_token: form_authenticity_token), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                      <%= image_tag 'delete.png' %> Delete
+                  <% end %>
+                  <% end %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+
+
+      <!-- /.panel-body -->
+    </div>
+    <%= link_to 'Add New Entry', new_llc_service_path, class: 'btn add_entry' %>
+  </div>
+  <!-- /.row -->
+</div>

@@ -1,0 +1,13 @@
+p
+  | Welcome 
+  = @user.email
+  | !
+p
+  | You can can login 
+  = link_to 'here', new_user_session_url
+p
+  | Email: 
+  = @user.email
+p
+  | Password: 
+  = @user.password

@@ -1,0 +1,290 @@
+<div id="page-wrapper">
+  <div class="row">
+    <h4 class="text-center">STARK DDSTEPS TO HELP ME LIVE A GOOD LIFEHRCPACKET</h4>
+    <div class="monthly-behavior-data">
+      <div class="row">
+        <div class="col-sm-6">Individual’s Name: <%= @behavior.user.full_name if @behavior.user.present? %></div>
+        <div class="col-sm-6">Restrictive Measures Implementation Date: <%= @behavior.created_at.strftime("%d.%m.%Y") %></div>
+      </div>
+
+
+      <div class="space-20"></div>
+      <div class="headline text-center">
+        <h4>MONTHLY BEHAVIOR SUPPORT DATA</h4>
+      </div>
+      <div class="space-20"></div>
+
+      <table class="table medication-count-table">
+        <thead>
+        <tr>
+          <td colspan="32">
+            <table class="table table-borderless" style="font-size: 12px !important;">
+              <tbody>
+              <tr>
+                <td>Provider: <%= @behavior.provider %></td>
+                <td colspan="2">Provider #: <%= @behavior.provider_no %></td>
+                <td colspan="2">Service #: <%= @behavior.service %></td>
+                <td colspan="2">Medicaid #: <%= @behavior.medicaid_number %></td>
+                <td>Month/Year: <%= @behavior.month %> / <%= @behavior.year %></td>
+              </tr>
+              <tr>
+                <td>Location:</td>
+                <td>
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">Work</span>
+                      <% if @behavior.location == 'work' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td colspan="2" class="vertical-align-middle">
+                  <i>Attended</i>
+                  <strong class="text-underline">  	&nbsp;12</strong>
+                  <i>days out of</i>
+                  <strong class="text-underline">  	&nbsp; 30</strong>
+                </td>
+                <td>
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">Transportation</span>
+                      <% if @behavior.transportation? %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td class="vertical-align-middle">
+                  <i>Has a PRN medication been added/changed? </i>
+                </td>
+                <td>
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">Yes</span>
+                      <% if @behavior.has_pnr == 'yes' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+
+                <td>
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">No</span>
+                      <% if @behavior.has_pnr == 'no' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+              <tr>
+                <td></td>
+                <td>
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">Home</span>
+                      <% if @behavior.location == 'home' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td class="vertical-align-middle">
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">1st Shift</span>
+                      <% if @behavior.shift == 'first' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td class="vertical-align-middle">
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">2nd Shift</span>
+                      <% if @behavior.shift == 'second' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td class="vertical-align-middle">
+                  <ul class="common-ul-style route-list">
+                    <li>
+                      <span class="check-mark">3rd Shift</span>
+                      <% if @behavior.shift == 'third' %>
+                          <span class="checkmark"></span>
+                      <% end %>
+                    </li>
+                  </ul>
+                </td>
+                <td colspan="3" class="vertical-align-middle">
+                  <i>Has a PRN medication been added/changed? &nbsp; &nbsp; </i>
+                  <strong class="text-underline"><%= @behavior.pnr_description %></strong>
+                </td>
+              </tr>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr>
+          <td colspan="32">Restrictive Measure Used</td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+          <td>22</td>
+          <td>23</td>
+          <td>24</td>
+          <td>25</td>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+          <td>29</td>
+          <td>30</td>
+          <td>31</td>
+        </tr>
+        <% @behavior.restricted_measure.attributes.except("id","behavior_id", "created_at", "updated_at").each  do |key, value| %>
+            <tr>
+              <td><%= value %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="space"></div>
+      <table class="table medication-count-table">
+        <thead>
+        <tr class="text-center">
+          <th>DATE</th>
+          <th>TIME</th>
+          <th>
+            Antecedents
+            <br>(What was happening before?)
+          </th>
+          <th>
+            Behavior
+            <br>(Describe incident)
+          </th>
+          <th>
+            Outcome
+            <br>(What staff/individual/others did after the incident)
+          </th>
+          <th>
+            Staff initialsSignature
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @behavior.behavior_outcomes.each  do |bo| %>
+            <tr>
+              <td><%= bo.date %></td>
+              <td><%= bo.time %></td>
+              <td><%= bo.antecedents %></td>
+              <td><%= bo.behavior_text %></td>
+              <td><%= bo.outcome %></td>
+              <td><%= bo.initials %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="space"></div>
+
+      <table class="table medication-count-table">
+        <thead>
+        <tr class="text-center">
+          <th>Signature</th>
+          <th>Initials</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @behavior.signature_lists.each  do |sl| %>
+            <tr>
+              <td><%= image_tag sl.signature, size: 125 %></td>
+              <td><%= sl.initials %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="sapce"></div>
+      <h5>Progress Notes/Comments/Concerns (use additional pages as needed):</h5>
+      <table class="table medication-count-table">
+        <thead>
+        <tr>
+          <th>
+            <strong>ADDITIONAL COMMENTS:</strong>
+          </th>
+          <th>Please note any staff/routine changes, doctor appointments, medication changes, incident reports, or any other important information/events that have occurred throughout the month which might be affecting the individual’s behavior</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr >
+          <td colspan="2"><%= @behavior.additional_comments %></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

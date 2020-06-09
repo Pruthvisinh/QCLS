@@ -1,0 +1,77 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading indiviuals_list">
+        Medication Count
+      </div>
+      </div>
+
+    <table class="table medication-count-table ">
+
+      <thead>
+      <tr>
+        <th class="text-center" colspan="6">Medication Count Sheet for Controlled Medications</th>
+      </tr>
+      <tr>
+        <th colspan="4">Name: <%= @medication_count.user.full_name  if @medication_count.user.present? %></th>
+      </tr>
+      <tr class="table-area-field100">
+        <th colspan="4">Medication Order:  <%= @medication_count.medication_order %></th>
+      </tr>
+      <!--<tr>-->
+      <!--<th rowspan="2">Grade.</th>-->
+      <!--<th rowspan="2">Yield Point.</th>-->
+      <!--<th colspan="2">Ultimate tensile strength</th>-->
+      <!--<th rowspan="2">Per cent elong. 50.8&nbsp;mm or&nbsp;2&nbsp;in.</th>-->
+      <!--<th rowspan="2">Per cent reduct. area.</th>-->
+      <!--</tr>-->
+      <tr class="title-list">
+        <th>Date</th>
+        <th>Time</th>
+        <th>Amount On Hand</th>
+        <th>Amount Used</th>
+        <th>Amount Left</th>
+        <th class="min-width-250">Staff Initials</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @medication_count.medication_count_items.each do |mdc| %>
+          <tr>
+            <td><%= mdc.date %></td>
+            <td><%= mdc.time %></td>
+            <td><%= mdc.amount_on_hand %></td>
+            <td><%= mdc.amount_used %></td>
+            <td><%= mdc.amount_left %></td>
+            <td><%= mdc.staff_initials %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <td colspan="4"><strong>Medication Discontinued</strong></td>
+        <td rowspan="2"><strong>Pharmacy Instructions:</strong></td>
+        <td rowspan="">
+          <strong>Medication Disposal:</strong>
+          <%= @medication_count.medication_disposal_location %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Discontinued Date:  <%= @medication_count.discontinued_date %></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-center"><strong>Certified Staff Signature & Initial:</strong></td>
+      </tr>
+      <% @medication_count.signature_lists.each do |sl| %>
+          <tr>
+            <td colspan="4"><%= image_tag sl.signature , style: "width:125px" %></td>
+            <td colspan="4"><%= sl.initials %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+</div>
+ </div>
+
+<script type="text/javascript">
+  $(".save-as-pdf" ).click(function() {
+    window.location.replace("<%= medication_count_path(@medication_count, format: :pdf) %>")
+  });
+</script>

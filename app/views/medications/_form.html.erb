@@ -1,0 +1,153 @@
+<%= form_for(@medication,html: {class: 'fromlist'}) do |f| %>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group" >
+        <%= f.label :user_id, "Individual", style: 'opacity: .5;' %><br />
+        <%= f.select(:user_id, current_company.individuals.collect { |ind| [ind.full_name, ind.id] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :address,class: 'form-control'%>
+        <%= f.label :address, class: 'form-control-placeholder' %>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.text_field :identified_by,class: 'form-control', required: true %>
+        <%= f.label :identified_by, class: 'form-control-placeholder' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :allergies,class: 'form-control'%>
+        <%= f.label :allergies, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <div class="form-group">
+        <%= f.text_field :diagbosis,class: 'form-control', required: true %>
+        <%= f.label :diagbosis, class: 'form-control-placeholder' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :special_instruction,class: 'form-control', required: true %>
+        <%= f.label :special_instruction, class: 'form-control-placeholder' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :emergency_medications,class: 'form-control', required: true %>
+        <%= f.label :emergency_medications, class: 'form-control-placeholder' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :behaviours_demonstrated_for_prn_meds,class: 'form-control', required: true %>
+        <%= f.label :behaviours_demonstrated_for_prn_meds, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldicsnew">Medication Routes:</div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 newcheck">
+      <ul>
+        <% Medication::MEDICATION_TYPE.each do |md_ty| %>
+            <li>
+              <div class="checkbox">
+
+                  <%= label_tag do %>
+                    <%=  f.check_box :medication_routes, { multiple: true,  checked: (f.object.new_record? ? false : (f.object.medication_routes.include? md_ty))  },md_ty, false%>
+                    <%= md_ty %>
+                <% end %>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Medication</div>
+      <div class="ist-information-wrapper">
+        <%= f.fields_for :ist_informations do |ist| %>
+            <%= render 'ist_items', ist: ist %>
+        <% end %>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 addfilds clearfix">
+        <a id="ist_info_add" class="addmore-btn" href="javascript:void(0);">
+          <%= image_tag 'plus_icon.png' %>Add
+          Medication Fields ( 2 )
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+<% end %>
+
+<%= render 'shared/signature_modal' %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+
+    $(function () {
+      $('.chosen-select').chosen({});
+
+      $('.datepicker').datepicker({
+
+        format: 'yyyy/mm/dd',
+        icons: {
+          time: 'fa fa-clock',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-calendar-check-o',
+          clear: 'fa fa-trash',
+          close: 'fa fa-times'
+
+        },
+
+      });
+
+      $('.timepicker').datetimepicker({
+
+        icons: {
+          time: 'fa fa-clock',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-calendar-check-o',
+          clear: 'fa fa-trash',
+          close: 'fa fa-times'
+
+        },
+
+        format: 'LT'
+      });
+
+    });
+
+
+    $("#ist_info_add").on("click", function () {
+      var serialNumber = new Date().getTime();
+      var regexp = new RegExp('serial_number', 'g');
+      $('.ist-information-wrapper').append("<%= escape_javascript(render 'ist_item').html_safe %>".replace(regexp, serialNumber));
+    });
+
+  });
+
+  $(function () {
+    $(document).off('click', '.signature').on('click', '.signature', function () {
+      var selector = this.id
+      $("#exampleModal").modal().on('shown.bs.modal', function () {
+        $(this).off('shown.bs.modal');
+        drawSignature('#' + selector);
+      });
+    });
+  });
+
+</script>

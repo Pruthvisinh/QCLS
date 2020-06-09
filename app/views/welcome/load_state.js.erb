@@ -1,0 +1,12 @@
+<% if @states.present? %>
+  stateSelector = $('#<%= @id %>');
+  stateSelector.empty();
+  stateSelector.append("<option value='Select State'>Select State</option>");
+  <% @states.each do |key, value| %>
+    stateSelector.append("<option value=<%= key %>> <%= value %></option>");
+  <% end %>
+  stateSelector.val("<%= params[:state] %>").trigger("chosen:updated");
+  $('#user_telephone').val("+" + <%= @calling_code %>);
+  $('#user_phone').val("+" + <%= @calling_code %>);
+  $('#user_company_phone').val("+" + <%= @calling_code %>);
+<% end %>

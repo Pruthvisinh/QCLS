@@ -1,0 +1,135 @@
+<%= form_for(@medication_count,html: {class: 'fromlist'}) do |f| %>
+    <div class="col-sm-12" style="padding: 0px">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+        <div class="form-group" >
+          <%= f.label :user_id, "Individual", style: 'opacity: .5;' %><br />
+          <%= f.select(:user_id, current_company.individuals.collect { |ind| [ind.full_name, ind.id] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :medication_order,class: 'form-control', required: true %>
+          <%= f.label :medication_order, class: 'form-control-placeholder' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="medication_count_-wrapper">
+      <%= f.fields_for :medication_count_items do |ls| %>
+          <%= render 'medication_counts/medication_counts_section', mdc: ls %>
+      <% end %>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 addfilds clearfix" id="">
+      <a id="medication_count_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add
+        Medication Counts Field ( 2 )
+      </a>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldicsnew">Medical Discontinued</div>
+
+    <div class="col-md-6 col-sm-12 savebut">
+      <div class="form-group">
+        <%= f.text_field :discontinued_date,class: 'form-control datepicker', required: true %>
+        <%= f.label :discontinued_date, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 savebut">
+      <div class="form-group">
+        <%= f.text_field :medication_disposal_location,class: 'form-control', required: true %>
+        <%= f.label :medication_disposal_location, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Signature Fields</div>
+      <div class="signature-list-wrapper">
+        <%= f.fields_for :signature_lists do |sl| %>
+            <%= render 'shared/signature_lists', sl: sl %>
+        <% end %>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 addfilds">
+        <a id="signature_add" class="addmore-btn" href="javascript:void(0);">
+          <%= image_tag 'plus_icon.png' %>Add
+          Signature Fields ( 2 )
+        </a>
+      </div>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+<% end %>
+<%= render 'shared/signature_modal' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(function () {
+
+      $('.datepicker').datepicker({
+
+        format: 'yyyy/mm/dd',
+        icons: {
+          time: 'fa fa-clock',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-calendar-check-o',
+          clear: 'fa fa-trash',
+          close: 'fa fa-times'
+
+        },
+
+      });
+
+      $('.timepicker').datetimepicker({
+
+        icons: {
+          time: 'fa fa-clock',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-calendar-check-o',
+          clear: 'fa fa-trash',
+          close: 'fa fa-times'
+
+        },
+
+        format: 'LT'
+      });
+
+    });
+
+    $("#medication_count_add").on("click", function () {
+      var serialNumber = new Date().getTime();
+      var regexp = new RegExp('serial_number', 'g');
+      $('.medication_count_-wrapper').append("<%= escape_javascript(render 'medication_counts/medication_count_item').html_safe %>".replace(regexp, serialNumber));
+    });
+
+    $("#signature_add").on("click", function () {
+      var serialNumber = new Date().getTime();
+      var regexp = new RegExp('serial_number', 'g');
+      $('.signature-list-wrapper').append("<%= escape_javascript(render 'signature_list').html_safe %>".replace(regexp, serialNumber));
+    });
+
+  });
+
+  $(function () {
+    $(document).off('click', '.signature').on('click', '.signature', function () {
+      var selector = this.id
+      $("#exampleModal").modal().on('shown.bs.modal', function () {
+        $(this).off('shown.bs.modal');
+        drawSignature('#' + selector);
+      });
+    });
+  });
+</script>

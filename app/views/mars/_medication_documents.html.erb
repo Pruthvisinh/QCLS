@@ -1,0 +1,72 @@
+<div class="col-md-12 col-sm-12">
+  <div class="form-group">
+    <%= md_item.text_field :documentation,class: 'form-control', required: true %>
+    <%= md_item.label :documentation, "Documentation (Provide Signature at the end of notation)", class: 'form-control-placeholder' %>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="form-group">
+    <%= md_item.text_field :date,class: 'form-control datepicker', required: true %>
+    <%= md_item.label :date, class: 'form-control-placeholder' %>
+  </div>
+  <div class="form-group">
+    <%= md_item.text_field :initials,class: 'form-control', required: true %>
+    <%= md_item.label :initials, class: 'form-control-placeholder' %>
+  </div>
+</div>
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="form-group">
+    <%= md_item.text_field :time,class: 'form-control timepicker', required: true %>
+    <%= md_item.label :time, class: 'form-control-placeholder' %>
+  </div>
+</div>
+
+<div class="col-sm-2">
+  <%= md_item.check_box :_destroy %>
+  <%= md_item.label :delete%>
+</div>
+
+
+<script type="text/javascript">
+  $(function () {
+
+    $('.datepicker').datepicker({
+
+      format: 'yyyy/mm/dd',
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+    });
+
+    $('.timepicker').datetimepicker({
+
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+      format: 'LT'
+    });
+
+  });
+</script>
+

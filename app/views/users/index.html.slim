@@ -1,0 +1,63 @@
+#page-wrapper
+  .panel.panel-default
+    .panel-heading.indiviuals_list
+      = render 'filter'
+
+    .panel-body
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover
+          thead
+            tr
+              th
+                | S. No.
+              th
+                | ID
+              th
+                | First Name
+              th
+                | Last Name
+              th
+                | Status
+
+          tbody
+            - @users.each_with_index do |user ,i|
+              tr
+                td
+                  = i + 1
+                td
+                  = link_to user_path(user) do
+                    = user.id
+                td
+                  = user.first_name
+                td
+                  = user.last_name
+                td
+                  - if user.active?
+                    = image_tag 'active.png'
+                  - else
+                    |  Inactive 
+                
+                - if can?(:manage, user)
+                  td
+                    = link_to edit_user_path(user) do
+                      .fa.fa-pencil
+                      |  Edit
+
+                    = ' | '
+                    = link_to user_path(user), data: { method: :delete, confirm: 'Are you sure to delete?' } do
+                      .fa.fa-times.mr-2
+                      | Delete
+
+                    = ' | '
+                    = link_to user_path(user) do
+                      .fa.fa-eye
+                      | View
+                   
+                    = ' | '
+                    = link_to reset_password_user_path(user) do
+                      .fa.fa-key
+                      | Reset password
+
+        = paginate @users
+        
+    = link_to 'Add New Entry', new_user_path(type: params[:type]), class: 'btn add_entry' if can?(:manage, User)

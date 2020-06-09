@@ -1,0 +1,117 @@
+<%= form_for @llc_service, html: {class: 'fromlist'} do |f| %>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group" >
+        <%= f.label :user_id, "Individual", style: 'opacity: .5;' %><br />
+        <%= f.select(:user_id, current_company.individuals.collect { |ind| [ind.full_name, ind.id] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :medicaid_number, class: 'form-control', required: true %>
+        <%= f.label :medicaid_number, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :location_of_services, class: 'form-control', required: true %>
+        <%= f.label :location_of_services, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.label :service_type, "Service Type", style: 'opacity: .5;' %><br/>
+        <%= f.select(:service_type, ['1', '2', '3', '4', '5'], {}, {:class => 'form-control chosen-select', required: true}) %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :provider_contract, class: 'form-control', required: true %>
+        <%= f.label :provider_contract, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :date, class: 'form-control datepicker', required: true %>
+        <%= f.label :date, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+
+
+    <%= f.fields_for :hpc_service do |hpcs| %>
+        <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">HPC Services Provided</div>
+        <%= render 'shared/hpc_service', hpcs: hpcs %>
+    <% end %>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Locations where other services were provided</div>
+    <div class="locations-wrapper">
+      <%= f.fields_for :location_services do |ls| %>
+          <%= render 'shared/location_services', ls: ls %>
+      <% end %>
+    </div>
+    <div class="col-md-4 col-sm-4 col-lg-4 addfilds">
+      <a id="location_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add Location
+        Fields ( 2 )
+      </a>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Service Fields</div>
+
+    <div class="change-service-wrapper">
+      <%= f.fields_for :change_services do |cs| %>
+          <%= render 'shared/change_services', cs: cs %>
+      <% end %>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 addfilds" id="">
+      <a id="change_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add Services
+        Fields ( 2 )
+      </a>
+    </div>
+
+
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Signature Fields</div>
+    <div class="signature-list-wrapper">
+      <%= f.fields_for :signature_lists do |sl| %>
+          <%= render 'shared/signature_lists', sl: sl %>
+      <% end %>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 addfilds">
+      <a id="signature_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add Signature Fields ( 2 )
+      </a>
+    </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+<% end %>
+
+<%= render 'shared/signature_modal' %>
+<script type="text/javascript">
+  $('.chosen-select').chosen({});
+  $("#location_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.locations-wrapper').append("<%= escape_javascript(render 'shared/location_service_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $("#change_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.change-service-wrapper').append("<%= escape_javascript(render 'shared/change_service_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $("#signature_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.signature-list-wrapper').append("<%= escape_javascript(render 'shared/signature_list_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $(function () {
+    $(document).off('click', '.signature').on('click', '.signature', function () {
+      var selector = this.id
+      $("#exampleModal").modal().on('shown.bs.modal', function () {
+        $(this).off('shown.bs.modal');
+        drawSignature('#' + selector);
+      });
+    });
+  });
+</script>
+

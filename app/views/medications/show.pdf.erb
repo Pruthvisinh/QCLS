@@ -1,0 +1,78 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="info-wrap">
+      <h4 class="text-center">Individual Specific Training Information</h4>
+      <p>This form is to be completed and reviewed with each certified personnel before
+        administration of medications or health-related activities.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="3">
+            <span><b>*Name:</b></span> &nbsp; &nbsp;  <span class="span-underline"><%= @medication.user.full_name if @medication.user.present? %></span>
+          </p>
+        </div>
+        <div class="col-sm-6">
+          <p class="">
+            <span><b>*Identified by:</b></span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.identified_by %></span>
+          </p>
+        </div>
+      </div>
+      <span class=""><b>*Address: </b></span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.address %></span> </br> </br>
+      <span class=""><b>*Allergies: </b></span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.allergies %></span> </br> </br>
+      <span class=""><b>*Diagnosis/ Health Care Information:</b> </span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.diagbosis %></span> </br> </br>
+  <span class=""><b>*Special Instructions (where and how takes meds
+    e.g. takes meds only in kitchen, with
+    apple juice, perfers blue mug, etc.): </b> </span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.special_instruction %></span> </br> </br>
+      <span class=""><b>*Emergency medications (Diastat/ EpiPen/ Glucagon) and or pm behavior medication: </b></span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.emergency_medications %></span> </br> </br>
+      <span class=""><b>*Behaviors demonstrated for PRN meds: </b></span>&nbsp; &nbsp;  <span class="span-underline"><%= @medication.behaviours_demonstrated_for_prn_meds %></span> </br> </br>
+      <hr>
+
+      <h5>Medication Routes:(Check all that apply)</h5>
+      <div class="routes-wrap">
+        <ul class="common-ul-style route-list">
+          <% Medication::MEDICATION_TYPE.each do |md_ty| %>
+              <li>
+                <span class="check-mark"><%= md_ty %></span>
+                <% if @medication.medication_routes.include? md_ty %>
+                    <span class="checkmark"></span>
+                <%  end %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+    <!-- Specific training info -->
+
+    <div class="space"></div>
+    <!-- IST information -->
+    <h4 class="text-center">IST Information: Certified DD Personnel (continued) for:</h4>
+    <table class="table medication-count-table">
+      <thead>
+      <tr>
+        <th><strong>Date of Training</strong></th>
+        <th><strong>Time</strong></th>
+        <th><strong>Signature of DD Personnel Receiving Training</strong></th>
+        <th><strong>Signature of Trainer</strong></th>
+        <th><strong>Date First Task Completed by Personnel</strong></th>
+        <th><strong>Date of update/ changes</strong></th>
+        <th><strong>Date of update/ changes</strong></th>
+        <th><strong>Date of update/ changes</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @medication.ist_informations.each  do |ist| %>
+          <tr>
+            <td><%= ist.date %></td>
+            <td><%= ist.time %></td>
+            <td><%= image_tag ist.signature_of_dd_person, size: 125 %></td>
+            <td><%= image_tag ist.signature_of_trainer, size: 125 %></td>
+            <td><%= ist.date_first_completed_by_person %></td>
+            <td><%= ist.date_of_change_1 %></td>
+            <td><%= ist.date_of_change_2 %></td>
+            <td><%= ist.date_of_change_3 %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

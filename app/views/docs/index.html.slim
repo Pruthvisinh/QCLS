@@ -1,0 +1,51 @@
+#page-wrapper
+  .panel.panel-default
+    .panel-heading
+      h1= (params[:type] || 'isp').upcase
+    .panel-body
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover
+          thead
+            tr
+              th S. No.
+              th ID
+              th Name
+              th File
+              th Assign To
+              th
+
+          tbody
+            - @docs.each_with_index do |doc, index|
+                tr
+                  td= index + 1
+                  td= doc.id
+                  td= doc.name
+                  td
+                    = link_to doc.file.url, target: '_blank' do
+                      .fa.fa-paperclip
+
+                  td
+                    - if doc.user.present?
+                      - if can? :manage, doc.user 
+                        = link_to doc.user do
+                          = doc.user.try(:full_name)
+                      - else
+                        = doc.user.try(:full_name)
+
+                  - if can?(:manage, Doc)
+                    td
+                      = link_to edit_doc_path(doc) do
+                        .fa.fa-pencil
+                        |  Edit
+
+                      = ' | '
+                      = link_to doc_path(doc), data: { method: :delete, confirm: 'Are you sure to delete?' } do
+                        .fa.fa-times.mr-2
+                        | Delete
+
+          = paginate @docs
+        
+      - if can?(:manage, Doc)
+        = link_to new_doc_path(type: params[:type]), class: 'btn add_entry' do
+          .fa.fa-upload.mr-2
+          | Upload New Document

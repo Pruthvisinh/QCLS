@@ -1,0 +1,13 @@
+<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+  <div class="form-group">
+    <%= text_field_tag "llc_service[signature_lists_attributes][serial_number][signature]", nil,readonly: true, class: "form-control signature"%>
+    <%= label_tag 'Signature',nil ,class: 'form-control-placeholder', for: 'llc_service_signature_lists_attributes_serial_number_signature' %>
+  </div>
+</div>
+
+<div class="col-md-4 col-sm-12 col-lg-6 col-xs-4">
+  <div class="form-group">
+    <%= text_field_tag "llc_service[signature_lists_attributes][serial_number][initials]", nil, class: "form-control" %>
+    <%= label_tag 'Initials',nil ,class: 'form-control-placeholder', for: 'llc_service_signature_lists_attributes_serial_number_initials' %>
+  </div>
+</div>

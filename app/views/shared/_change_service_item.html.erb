@@ -1,0 +1,17 @@
+<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+  <div class="form-group">
+    <%= text_field_tag "llc_service[change_services_attributes][serial_number][description]", nil, class: "form-control" %>
+    <%= label_tag 'Description', nil ,class: 'form-control-placeholder', for: 'llc_service_change_services_attributes_serial_number_description' %>
+  </div>
+</div>
+
+<div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+  <div class="form-group">
+    <%= text_field_tag "llc_service[change_services_attributes][serial_number][date]", nil, class: "form-control datepicker" %>
+    <%= label_tag 'Date', nil ,class: 'form-control-placeholder', for: 'llc_service_change_services_attributes_serial_number_date' %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.datepicker').datepicker({format: 'yyyy/mm/dd'});
+</script>

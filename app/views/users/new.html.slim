@@ -1,0 +1,7 @@
+#page-wrapper
+  .panel.panel-default
+    .panel-heading  
+      h1 Create #{@user.role.capitalize}
+    .panel-body
+      = form_for(@user, html: {class: 'fromlist'}) do |f|
+        = render 'form', f: f

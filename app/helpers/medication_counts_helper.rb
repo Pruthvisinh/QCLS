@@ -1,0 +1,2 @@
+module MedicationCountsHelper
+end

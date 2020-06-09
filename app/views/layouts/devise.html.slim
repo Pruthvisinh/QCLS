@@ -1,0 +1,16 @@
+doctype html
+html
+  =  render 'shared/head'
+  body class="#{controller_name} #{action_name}"
+    #wrapper
+      - if current_user.present?
+        = render 'shared/left_nav'
+      - else
+        = render 'shared/nav'
+        
+      = render 'shared/flash_message'
+      = render 'shared/notification'
+      br/
+      .col-lg-6.col-lg-offset-3
+        .panel.panel-default
+          = yield

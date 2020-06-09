@@ -1,0 +1,128 @@
+<%= form_for @mar, html: {class: 'fromlist'} do |f| %>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Medication</div>
+      <div class="medication-list-wrapper">
+        <%= f.fields_for :medication_items do |md_item| %>
+            <%= render 'medication_items', md_item: md_item %>
+        <% end %>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 addfilds clearfix" id="">
+        <a id="medication_add" class="addmore-btn" href="javascript:void(0);">
+          <%= image_tag 'plus_icon.png' %>Add
+          Medication Fields ( 2 )
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :allergies, class: 'form-control', required: true %>
+          <%= f.label :allergies, class: 'form-control-placeholder' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :phone_number, class: 'form-control', required: true %>
+          <%= f.label :phone_number, class: 'form-control-placeholder' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :record_text, class: 'form-control', required: true %>
+          <%= f.label :record_text, 'Record', class: 'form-control-placeholder' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :sex, "Service Type", style: 'opacity: .5;' %><br/>
+          <%= f.select(:sex, ['Male', 'Female'], {}, {:class => 'form-control chosen-select', required: true}) %>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :physician_name, class: 'form-control', required: true %>
+          <%= f.label :physician_name, class: 'form-control-placeholder' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :name, class: 'form-control', required: true %>
+          <%= f.label :name, class: 'form-control-placeholder' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :dob, class: 'form-control datepicker', required: true %>
+          <%= f.label :dob, "Date Of Birth", class: 'form-control-placeholder' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="document-list-wrapper">
+        <div class="col-md-6 col-sm-12 col-lg-6 medicaldics">Medication Documentation</div>
+        <%= f.fields_for :medication_documents do |md_item| %>
+            <%= render 'medication_documents', md_item: md_item %>
+        <% end %>
+      </div>
+      <div class="col-md-7 col-sm-12 col-lg-7 addfilds">
+        <a id="medication_document_add" class="addmore-btn" href="javascript:void(0);">
+          <%= image_tag 'plus_icon.png' %>Add
+          Medication Document Fields ( 2 )
+        </a>
+      </div>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Signature Fields</div>
+      <div class="signature-list-wrapper">
+        <%= f.fields_for :signature_lists do |sl| %>
+            <%= render 'shared/signature_lists', sl: sl %>
+        <% end %>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 addfilds" >
+        <a id="signature_add" class="addmore-btn" href="javascript:void(0);">
+          <%= image_tag 'plus_icon.png' %>Add
+          Add
+          Signature Fields ( 2 )
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+<% end %>
+
+<%= render 'shared/signature_modal' %>
+
+
+<script type="text/javascript">
+  $('.chosen-select').chosen({});
+  $("#medication_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.medication-list-wrapper').append("<%= escape_javascript(render 'medication_list_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $("#medication_document_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.document-list-wrapper').append("<%= escape_javascript(render 'medication_document_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $("#signature_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.signature-list-wrapper').append("<%= escape_javascript(render 'signature_list_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $(function () {
+    $(document).off('click', '.signature').on('click', '.signature', function () {
+      var selector = this.id
+      $("#exampleModal").modal().on('shown.bs.modal', function () {
+        $(this).off('shown.bs.modal');
+        drawSignature('#' + selector);
+      });
+    });
+  });
+
+</script>

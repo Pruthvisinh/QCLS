@@ -1,0 +1,272 @@
+<h4 class="text-center">Medication Administration Record (MAR)</h4>
+<table class="table medication-count-table mar-table">
+  <!--<caption class="text-center lead">Medication Administration Record (MAR)</caption>-->
+  <thead>
+  <tr>
+    <th class="r-border-transparent" colspan="2">Month/Year</th>
+    <th class="l-border-transparent" colspan="32">Provider Name:
+      Quality Comfort Living &amp; Services LLC
+    </th>
+  </tr>
+  <tr>
+    <th><strong>Medication</strong></th>
+    <th></th>
+    <th>Time Meds</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    <th>10</th>
+    <th>11</th>
+    <th>12</th>
+    <th>13</th>
+    <th>14</th>
+    <th>15</th>
+    <th>16</th>
+    <th>17</th>
+    <th>18</th>
+    <th>19</th>
+    <th>20</th>
+    <th>21</th>
+    <th>22</th>
+    <th>23</th>
+    <th>24</th>
+    <th>25</th>
+    <th>26</th>
+    <th>27</th>
+    <th>28</th>
+    <th>29</th>
+    <th>30</th>
+    <th>31</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @mar.medication_items.each do |mdt|%>
+      <tr>
+        <td class="flexible-td" rowspan="4"><%= mdt.medication_text %></td>
+        <td class="width-55" style="width: 150px" rowspan="2">
+          <span class="">Start Date: <%= mdt.start_date %></span>
+        </td>
+        <td class="width-55">7am</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="width: 150px" rowspan="2">
+          <span class="">Stop Date: <%= mdt.stop_date %></span>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  <% end %>
+
+  <!--copy tr element ###############################-->
+
+  <tr>
+    <td colspan="2">Diagnosis: Cerebral Palsy </td>
+    <td colspan="16">Regular Liquids With straw   Puree Food</td>
+    <td colspan="16">Comments</td>
+  </tr>
+  <tr>
+    <td colspan="5" rowspan="2"><b><%= @mar.allergies %></b></td>
+    <td colspan="14">Physician Name: <%= @mar.physician_name %></td>
+    <td colspan="15" rowspan="2">
+      <p class="text-center para-hr" style="border-bottom: 2px solid #333">Note</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan="14">Phone Number: <%= @mar.phone_number %> </td>
+  </tr>
+  <tr>
+    <td colspan="15">
+      <strong>Name: <%= @mar.name %></strong>
+    </td>
+    <td colspan="8">
+      <strong>Record: <%= @mar.record_text %></strong>
+    </td>
+    <td colspan="7">
+      <strong>Date of Birth: <%= @mar.dob %></strong>
+    </td>
+    <td colspan="4">
+      <strong>Sex: <%= @mar.sex %></strong>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!-- Medication Administration Record (MAR) -->
+
+<div class="space"></div>
+<!-- Another table -->
+<table class="table medication-count-table">
+  <thead>
+  <tr>
+    <th class="min-width-250">Date</th>
+    <th class="width-55">Time</th>
+    <th>Initials</th>
+    <th>Documentation (Use as many lines as needed & provide signature at the end of notation.) </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @mar.medication_documents.each do |doc|%>
+      <tr>
+        <td><%= doc.date %></td>
+        <td style="width: 100px"><%= doc.time %></td>
+        <td><%= doc.initials %></td>
+        <td><%= doc.documentation %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<!-- Another table -->
+
+<div class="space"></div>
+<!-- Another table 1 -->
+<table class="table medication-count-table">
+  <thead>
+  <tr>
+    <th class="text-center">Staff Initials</th>
+    <th class="text-center">Staff Signature</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @mar.signature_lists.each do |sl| %>
+      <tr>
+        <td><%= image_tag sl.signature , style: "width:125px" %></td>
+        <td ><%= sl.initials %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

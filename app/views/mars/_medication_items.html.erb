@@ -1,0 +1,25 @@
+<div class="col-md-12 col-sm-12">
+  <div class="form-group">
+    <%= md_item.text_field :medication_text,class: 'form-control', required: true %>
+    <%= md_item.label :medication_text, "Medication", class: 'form-control-placeholder' %>
+  </div>
+</div>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="form-group">
+      <%= md_item.text_field :start_date,class: 'form-control datepicker', required: true %>
+      <%= md_item.label :start_date, class: 'form-control-placeholder' %>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="form-group">
+      <%= md_item.text_field :stop_date,class: 'form-control datepicker', required: true %>
+      <%= md_item.label :stop_date, class: 'form-control-placeholder' %>
+    </div>
+  </div>
+
+<div class="col-sm-2">
+  <%= md_item.check_box :_destroy %>
+  <%= md_item.label :delete%>
+</div>
+

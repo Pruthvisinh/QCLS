@@ -1,0 +1,55 @@
+<div class="col-md-12 col-sm-12">
+  <input class="form-control" required="required" name="mar[medication_items_attributes][serial_number][medication_text]" id="mar_medication_items_attributes_serial_number_medication_text" type="text">
+  <label class="form-control-placeholder" for="mar_medication_items_attributes_serial_number_medication_text">Medication Text</label>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <input class="form-control datepicker" required="required" name="mar[medication_items_attributes][serial_number][start_date]" id="mar_medication_items_attributes_serial_number_start_date" type="text">
+  <label class="form-control-placeholder" for="mar_medication_items_attributes_serial_number_start_date">Start date</label>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <input class="form-control datepicker" required="required" name="mar[medication_items_attributes][serial_number][stop_date]" id="mar_medication_items_attributes_serial_number_stop_date" type="text">
+  <label class="form-control-placeholder" for="mar_medication_items_attributes_serial_number_stop_date">Stop date</label>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+
+    $('.datepicker').datepicker({
+
+      format: 'yyyy/mm/dd',
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+    });
+
+    $('.timepicker').datetimepicker({
+
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+      format: 'LT'
+    });
+
+  });
+</script>

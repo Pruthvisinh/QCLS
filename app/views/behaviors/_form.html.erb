@@ -1,0 +1,194 @@
+<%= form_for @behavior, html: {class: 'fromlist'} do |f| %>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group" >
+        <%= f.label :user_id, "Individual", style: 'opacity: .5;' %><br />
+        <%= f.select(:user_id, current_company.individuals.collect { |ind| [ind.full_name, ind.id] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :provider_no, class: 'form-control', required: true %>
+        <%= f.label :provider_no, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :service, class: 'form-control', required: true %>
+        <%= f.label :service, class: 'form-control-placeholder' %>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12" style="padding-left:0px">
+        <div class="form-group">
+          <%= f.text_field :month, class: 'form-control', required: true %>
+          <%= f.label :month, class: 'form-control-placeholder' %>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :year, class: 'form-control', required: true %>
+          <%= f.label :year, class: 'form-control-placeholder' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group" >
+        <%= f.text_field :provider, class: 'form-control', required: true %>
+        <%= f.label :provider, class: 'form-control-placeholder' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :medicaid_number, class: 'form-control', required: true %>
+        <%= f.label :medicaid_number, class: 'form-control-placeholder' %>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12" style="padding-left:0px">
+        <div class="form-group">
+          <%= f.text_field :attended_day, class: 'form-control', required: true %>
+          <%= f.label :attended_day, class: 'form-control-placeholder' %>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :total_day, class: 'form-control', required: true %>
+          <%= f.label :total_day, class: 'form-control-placeholder' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12" style="padding-left: 0">
+      <div class="col-md-4 col-sm-4">
+        Location
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :location, 'home'%>
+          <%= f.label :location, "Home",for:'behavior_location_home', :value => "Home"  %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :location, 'work' %>
+          <%= f.label :location, "Work",for:'behavior_location_work', :value => "Work" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12" style="padding-left: 0">
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :shift, 'first'%>
+          <%= f.label :shift, "First Shift",for:'behavior_shift_first', :value => "first"  %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :shift, 'second'%>
+          <%= f.label :shift, "Second Shift",for:'behavior_shift_second', :value => "second"  %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :shift, 'third'%>
+          <%= f.label :shift, "Third Shift",for:'behavior_shift_third', :value => "third"  %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12" style="padding-left: 0">
+      <div class="col-md-4 col-sm-4">
+        PRN medication been added/changed?
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :has_pnr, 'yes'%>
+          <%= f.label :has_pnr, "Yes",for:'behavior_has_pnr_yes', :value => "yes"  %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group">
+          <%= f.radio_button :has_pnr, 'no'%>
+          <%= f.label :has_pnr, "No",for:'behavior_has_pnr_no', :value => "no"  %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.text_field :pnr_description, class: 'form-control', required: true %>
+        <%= f.label :pnr_description, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.check_box :transportation%>
+        <%= f.label :transportation  %>
+      </div>
+    </div>
+
+    <%= f.fields_for :restricted_measure do |rem| %>
+        <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Restrictive Measure Used</div>
+        <%= render 'restricted_measure', rem: rem %>
+    <% end %>
+
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Behavior Outcomes</div>
+    <div class="behavior-wrapper">
+      <%= f.fields_for :behavior_outcomes do |rem| %>
+          <%= render 'behavior_outcome', rem: rem %>
+      <% end %>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 addfilds">
+      <a id="behavior_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add Behavior outcome Fields ( 2 )
+      </a>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Signature Fields</div>
+    <div class="signature-list-wrapper">
+      <%= f.fields_for :signature_lists do |sl| %>
+          <%= render 'shared/signature_lists', sl: sl %>
+      <% end %>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 addfilds">
+      <a id="signature_add" class="addmore-btn" href="javascript:void(0);">
+        <%= image_tag 'plus_icon.png' %>Add Signature Fields ( 2 )
+      </a>
+    </div>
+
+
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+      <div class="form-group">
+        <%= f.text_area :additional_comments, class: 'form-control', required: true %>
+        <%= f.label :additional_comments, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+
+<% end %>
+
+
+<%= render 'shared/signature_modal' %>
+<script type="text/javascript">
+  $('.chosen-select').chosen({});
+  $("#signature_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.signature-list-wrapper').append("<%= escape_javascript(render 'signature_list_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $("#behavior_add").on("click", function () {
+    var serialNumber = new Date().getTime();
+    var regexp = new RegExp('serial_number', 'g');
+    $('.behavior-wrapper').append("<%= escape_javascript(render 'behavior_outcome_item').html_safe %>".replace(regexp, serialNumber));
+  });
+
+  $(function () {
+    $(document).off('click', '.signature').on('click', '.signature', function () {
+      var selector = this.id
+      $("#exampleModal").modal().on('shown.bs.modal', function () {
+        $(this).off('shown.bs.modal');
+        drawSignature('#' + selector);
+      });
+    });
+  });
+</script>

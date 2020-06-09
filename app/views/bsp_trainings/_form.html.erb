@@ -1,0 +1,100 @@
+<%= form_for(@bsptraining,html: {class: 'fromlist'}) do |f| %>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group" >
+        <%= f.label :user_id, "Individual", style: 'opacity: .5;' %><br />
+        <%= f.select(:user_id, current_company.individuals.collect { |ind| [ind.full_name, ind.id] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+      </div>
+
+      <div class="form-group plusinput">
+        <% unless f.object.new_record? %>
+            <img src="<%= f.object.signature_of_dd %>", width="200", height="200" />
+        <% end %>
+        <%= f.text_field :signature_of_dd,class: 'form-control signature', readonly: true, style: "  color: transparent;" %>
+        <label class="form-control-placeholder" for="signature_of_dd">Signature of DD Personal Receiving Traning</label>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.text_field :date_of_change_1,class: 'form-control datepicker'%>
+        <label class="form-control-placeholder" for="date_of_change_1">Date of Update/Changes</label>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :date_of_change_3,class: 'form-control datepicker'%>
+        <label class="form-control-placeholder" for="date_of_change_3">Date of Update/Changes</label>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :date_of_change_2,class: 'form-control datepicker'%>
+        <label class="form-control-placeholder" for="date_of_change_2">Date of Update/Changes</label>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.text_field :initial,class: 'form-control '%>
+        <label class="form-control-placeholder" for="initial">Initial</label>
+      </div>
+
+      <div class="form-group plusinput">
+        <% unless f.object.new_record? %>
+            <img src="<%= f.object.signature_of_trainer %>", width="200", height="200" />
+        <% end %>
+        <%= f.text_field :signature_of_trainer,class: 'form-control signature',readonly: true, style: "  color: transparent;" %>
+        <label class="form-control-placeholder" for="signature_of_trainer">Signature of Trainer</label>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :date,class: 'form-control datepicker'%>
+        <label class="form-control-placeholder" for="date">Date of Training</label>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :first_task_completed_date,class: 'form-control datepicker'%>
+        <label class="form-control-placeholder" for="first_task_completed_date">Date First Task Completed By Person</label>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+    <div class="img">
+
+    </div>
+<% end %>
+<%= render 'shared/signature_modal' %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.chosen-select').chosen({});
+    $(function () {
+
+      $('.datepicker').datepicker({
+
+        format: 'yyyy/mm/dd',
+        icons: {
+          time: 'fa fa-clock',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-calendar-check-o',
+          clear: 'fa fa-trash',
+          close: 'fa fa-times'
+
+        },
+
+      });
+    });
+
+    $(function () {
+      $(document).off('click', '.signature').on('click', '.signature', function () {
+        var selector = this.id
+        $("#exampleModal").modal().on('shown.bs.modal', function () {
+          $(this).off('shown.bs.modal');
+          drawSignature('#' + selector);
+        });
+      });
+    });
+
+  });
+</script>

@@ -1,0 +1,114 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'fromlist'}) do |f| %>
+    <div class="clearfix">
+    <%= f.fields_for :company do |ff| %>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+          <div class="form-group">
+            <%= ff.label :company_type, "User Type", style: 'opacity: .5;' %><br />
+            <%= ff.select(:company_type, ['Service Provider','Individual'], {}, { :class => 'form-control chosen-select', required: true}) %>
+          </div>
+
+          <div class="form-group">
+            <%= ff.label :state, "State", style: 'opacity: .5;' %><br />
+            <%= ff.select(:state, [], {}, { :class => 'form-control chosen-select', required: true}) %>
+          </div>
+          <div class="form-group">
+            <%= ff.text_field :phone, class: 'form-control', required: true %>
+            <%= ff.label :phone, class: 'form-control-placeholder' %>
+          </div>
+
+          <div class="form-group">
+            <%= ff.text_field :address_2,class: 'form-control', required: true %>
+            <%= ff.label :address_2, class: 'form-control-placeholder' %>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+          <div class="form-group" id="city-load">
+            <%= ff.label :country, "Country", style: 'opacity: .5;' %><br />
+            <%= ff.select(:country, CS.countries.collect { |key, val| [val, key] }, {}, { :class => 'form-control chosen-select', required: true}) %>
+          </div>
+          <div class="form-group" id="city-load">
+            <%= ff.label :city, "City", style: 'opacity: .5;' %><br />
+            <%= ff.select(:city, [], {}, { :class => 'form-control chosen-select', required: true}) %>
+          </div>
+
+          <div class="form-group">
+            <%= ff.text_field :address_1,class: 'form-control' %>
+            <%= ff.label :address_1, class: 'form-control-placeholder' %>
+          </div>
+
+          <div class="form-group">
+            <%= ff.text_field :zip,class: 'form-control' %>
+            <%= ff.label :zip, class: 'form-control-placeholder' %>
+          </div>
+        </div>
+    <% end %>
+    </div>
+
+    <div class="clearfix">
+    <div class="col-md-12 col-sm-12 col-lg-12 medicaldics">Account Details</div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.email_field :email ,class: 'form-control'%>
+        <%= f.label :email, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :last_name,class: 'form-control'%>
+        <%= f.label :last_name, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control'%>
+        <%= f.label :password_confirmation, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+      <div class="form-group">
+        <%= f.text_field :first_name,class: 'form-control'%>
+        <%= f.label :first_name, class: 'form-control-placeholder' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "off",class: 'form-control' %>
+        <%= f.label :password, class: 'form-control-placeholder' %>
+      </div>
+    </div>
+    </div>
+
+      <div class="checkleft" style="margin-left: 40px;">
+        <div class="radio">
+          <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+          <label for="optionsRadios1">I agree to the Health Terms of Service & I certify that I have read and agree the Health Privacy Policy & Health Business Associate Agreement </label>
+        </div>
+      </div>
+
+    <div class="col-md-12 col-sm-12 savebut">
+      <button type="submit" class="btn btn-default">Sign Up</button>
+    </div>
+<%end%>
+
+<script type="text/javascript">
+  $('.chosen-select').chosen({
+
+  });
+
+    $('#user_company_state').change(function() {
+      var state = $(this).val()
+      var country = $('#user_company_country').val();
+      $.ajax({
+        type: 'get',
+        url: '<%= load_cities_path %>',
+        data: {state: state, country: country},
+        dataType: 'script',
+      });
+    });
+
+  $('#user_company_country').change(function() {
+    var country = $(this).val()
+    $.ajax({
+      type: 'get',
+      url: '<%= load_state_path %>',
+      data: {country: country, id: 'user_company_state'},
+      dataType: 'script',
+    });
+  });
+</script>

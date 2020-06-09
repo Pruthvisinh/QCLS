@@ -1,0 +1,68 @@
+<div class="col-md-12 col-sm-12">
+  <div class="form-group">
+    <input class="form-control" required="required" name="mar[medication_documents_attributes][serial_number][documentation]" id="mar_medication_documents_attributes_serial_number_documentation" type="text">
+    <label class="form-control-placeholder" for="mar_medication_documents_attributes_serial_number_documentation">Documentation (Provide Signature at the end of notation)</label>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="form-group">
+    <input class="form-control datepicker" required="required" name="mar[medication_documents_attributes][serial_number][date]" id="mar_medication_documents_attributes_serial_number_date" type="text">
+    <label class="form-control-placeholder" for="mar_medication_documents_attributes_serial_number_date">Date</label>
+  </div>
+  <div class="form-group">
+    <input class="form-control" required="required" name="mar[medication_documents_attributes][serial_number][initials]" id="mar_medication_documents_attributes_serial_number_initials" type="text">
+    <label class="form-control-placeholder" for="mar_medication_documents_attributes_serial_number_initials">Initials</label>
+  </div>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div class="form-group">
+    <input class="form-control timepicker" required="required" name="mar[medication_documents_attributes][serial_number][time]" id="mar_medication_documents_attributes_serial_number_time" type="text">
+    <label class="form-control-placeholder" for="mar_medication_documents_attributes_serial_number_time">Time</label>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(function () {
+
+    $('.datepicker').datepicker({
+
+      format: 'yyyy/mm/dd',
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+    });
+
+    $('.timepicker').datetimepicker({
+
+      icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+
+      },
+
+      format: 'LT'
+    });
+
+  });
+</script>
+
+    
